@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANARA — Hair Spa & Wellness Sanctuary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sand:   #f5efe6;
+  --linen:  #ede3d5;
+  --bark:   #2e231a;
+  --umber:  #6b4f3a;
+  --clay:   #9e6b45;
+  --gold:   #c4944a;
+  --gold-l: #ddb878;
+  --sage:   #7a8c6e;
+  --cream:  #faf7f2;
+  --mist:   #9a8c82;
+  --white:  #ffffff;
+  --dark:   #1a1410;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--bark);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{width:7px;height:7px;background:var(--clay);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s}
+.cursor-ring{width:26px;height:26px;border:1px solid var(--clay);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .35s cubic-bezier(.25,.46,.45,.94),top .35s cubic-bezier(.25,.46,.45,.94),width .3s,height .3s,opacity .3s;opacity:.45}
+.cursor-ring.hov{width:50px;height:50px;opacity:.18}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.8rem 5rem;display:flex;align-items:center;justify-content:space-between;transition:padding .4s,background .5s,border-color .5s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(250,247,242,.95);backdrop-filter:blur(16px);padding:1rem 5rem;border-bottom:1px solid rgba(196,148,74,.12)}
+.nav-brand{text-decoration:none;cursor:none}
+.nav-brand-name{display:block;font-family:'Cormorant Garamond',serif;font-size:1.4rem;letter-spacing:.25em;color:var(--white);text-transform:uppercase;transition:color .4s;line-height:1}
+.nav-brand-sub{font-size:.5rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase}
+nav.scrolled .nav-brand-name{color:var(--bark)}
+nav.on-light .nav-brand-name{color:var(--bark)}
+nav.on-light .nav-links a{color:var(--umber)}
+
+.nav-links{display:flex;gap:3rem;list-style:none}
+.nav-links a{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);text-decoration:none;transition:color .3s;position:relative;cursor:none}
+nav.scrolled .nav-links a{color:var(--umber)}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:var(--gold) !important}
+
+.nav-book{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:.5rem 1.4rem;text-decoration:none;transition:background .3s,color .3s;cursor:none}
+.nav-book:hover{background:var(--gold);color:var(--white)}
+
+/* PAGE TRANSITION OVERLAY */
+.page-overlay{position:fixed;inset:0;z-index:500;background:var(--bark);transform:translateY(-100%);pointer-events:none}
+.page-overlay.enter{animation:overlayIn .55s cubic-bezier(.76,0,.24,1) forwards}
+.page-overlay.exit{animation:overlayOut .55s cubic-bezier(.76,0,.24,1) forwards}
+@keyframes overlayIn{0%{transform:translateY(-100%)}100%{transform:translateY(0)}}
+@keyframes overlayOut{0%{transform:translateY(0)}100%{transform:translateY(100%)}}
+
+/* PAGE SYSTEM */
+.page{display:none;min-height:100vh}
+.page.active{display:block}
+.page-in .reveal{animation:fadeUp .8s cubic-bezier(.22,.61,.36,1) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HOME PAGE ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,#1a1008 0%,#2d1e0f 30%,#1e1a10 60%,#0f0e08 100%)}
+.hero-bg::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.3;animation:grain .8s steps(2) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,5%)}50%{transform:translate(3%,-3%)}75%{transform:translate(-5%,2%)}100%{transform:translate(2%,-5%)}}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 60%,rgba(196,148,74,.08) 0%,transparent 70%)}
+.hero-stem{position:absolute;left:4.5rem;top:15vh;bottom:15vh;width:1px;background:linear-gradient(to bottom,transparent,var(--gold) 20%,var(--gold) 80%,transparent);opacity:.4;animation:stemUp 1.8s ease .3s both}
+@keyframes stemUp{from{transform:scaleY(0);transform-origin:top;opacity:0}to{transform:scaleY(1);opacity:.4}}
+.hero-aside{position:absolute;left:5.8rem;top:50%;transform:translateY(-50%) rotate(180deg);font-size:.52rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;writing-mode:vertical-rl;animation:fadeUp 1s ease 1.4s both}
+
+.hero-content{position:relative;z-index:2;padding:0 5rem 10vh;animation:fadeUp 1.2s cubic-bezier(.22,.61,.36,1) .5s both}
+.hero-eyebrow{font-size:.6rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.8rem,9vw,8.5rem);font-weight:300;line-height:.92;color:var(--white);margin-bottom:1.8rem}
+.hero-title em{font-style:italic;color:var(--gold-l);display:block}
+.hero-body{font-size:.78rem;line-height:2.2;color:rgba(255,255,255,.5);max-width:360px;margin-bottom:3rem}
+.hero-cta{display:inline-flex;align-items:center;gap:1.2rem;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--white);text-decoration:none;cursor:none;transition:gap .3s}
+.hero-cta:hover{gap:2.2rem}
+.hero-cta-bar{width:38px;height:1px;background:var(--gold);transition:width .3s}
+.hero-cta:hover .hero-cta-bar{width:58px}
+
+.scroll-beacon{position:absolute;right:4.5rem;bottom:8vh;display:flex;flex-direction:column;align-items:center;gap:.7rem;animation:fadeUp 1s ease 1.8s both}
+.scroll-beacon span{font-size:.5rem;letter-spacing:.3em;color:rgba(255,255,255,.3);text-transform:uppercase;writing-mode:vertical-rl}
+.scroll-wheel{width:18px;height:30px;border:1px solid rgba(255,255,255,.18);border-radius:9px;position:relative}
+.scroll-wheel::before{content:'';position:absolute;left:50%;top:5px;width:2px;height:2px;background:var(--gold);border-radius:50%;transform:translateX(-50%);animation:dot 2s ease infinite}
+@keyframes dot{0%,100%{top:5px;opacity:1}80%{top:18px;opacity:0}}
+
+/* SECTION BASE */
+section{padding:8rem 5rem}
+.s-label{font-size:.58rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── INTRO BAND ── */
+.intro-band{background:var(--linen);padding:5rem;display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:center}
+.intro-band .big-num{font-family:'Cormorant Garamond',serif;font-size:6rem;color:var(--gold);opacity:.18;font-weight:300;line-height:1}
+.intro-band p{font-size:.88rem;line-height:2.4;color:var(--umber);max-width:560px}
+.intro-band p em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--clay);font-size:1.05rem}
+
+/* ── SPA SERVICES PREVIEW ── */
+.spa-services{background:var(--cream)}
+.spa-services h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;margin-bottom:.5rem}
+.spa-services h2 em{font-style:italic;color:var(--clay)}
+.spa-services-sub{font-size:.72rem;color:var(--mist);letter-spacing:.1em;margin-bottom:4rem}
+.spa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.spa-card{background:var(--white);border:1px solid rgba(196,148,74,.1);padding:2.5rem 2rem;transition:box-shadow .4s,transform .4s,border-color .4s;cursor:none}
+.spa-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.07);transform:translateY(-5px);border-color:rgba(196,148,74,.3)}
+.spa-icon{width:40px;height:40px;margin-bottom:1.8rem}
+.spa-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;margin-bottom:.8rem;line-height:1.2}
+.spa-card h3 em{font-style:italic;display:block;color:var(--clay);font-size:1rem}
+.spa-card p{font-size:.72rem;line-height:2;color:var(--mist);margin-bottom:1.5rem}
+.spa-card-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--umber)}
+.spa-card-price strong{color:var(--gold);font-weight:400}
+
+/* ── RITUAL SECTION ── */
+.ritual{background:var(--bark);padding:8rem 5rem}
+.ritual-inner{display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center}
+.ritual-text .s-label{color:var(--gold)}
+.ritual-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:300;color:var(--white);line-height:1.1;margin-bottom:1.5rem}
+.ritual-text h2 em{font-style:italic;color:var(--gold-l)}
+.ritual-text p{font-size:.78rem;line-height:2.3;color:rgba(255,255,255,.4);margin-bottom:2.5rem;max-width:400px}
+.ritual-steps{display:flex;flex-direction:column;gap:0}
+.ritual-step{display:grid;grid-template-columns:2.5rem 1fr;gap:1.2rem;padding:1.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);align-items:start}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:.75rem;color:var(--gold);opacity:.6;padding-top:.2rem}
+.step-text h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white);margin-bottom:.4rem}
+.step-text p{font-size:.7rem;line-height:1.9;color:rgba(255,255,255,.3)}
+.ritual-visual{position:relative;height:520px}
+.ritual-frame{position:absolute;inset:0;border:1px solid rgba(196,148,74,.2);overflow:hidden}
+.ritual-frame svg{width:100%;height:100%}
+.ritual-tag{position:absolute;bottom:-1px;left:-1px;background:var(--gold);padding:.6rem 1.4rem;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--white)}
+
+/* ── GALLERY (home preview) ── */
+.gal-strip{display:flex;height:380px;overflow:hidden}
+.gal-item{flex:1;position:relative;overflow:hidden;transition:flex .7s cubic-bezier(.4,0,.2,1);cursor:none}
+.gal-item:hover{flex:2.6}
+.gal-bg{width:100%;height:100%;transition:transform .7s ease}
+.gal-item:hover .gal-bg{transform:scale(1.06)}
+.gal-lbl{position:absolute;bottom:1.8rem;left:1.8rem;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:white;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s}
+.gal-item:hover .gal-lbl{opacity:1;transform:translateY(0)}
+
+/* ── TESTIMONIALS ── */
+.testi{background:var(--linen);text-align:center}
+.testi h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:300;margin-bottom:.5rem}
+.testi h2 em{font-style:italic;color:var(--clay)}
+.testi-sub{font-size:.7rem;color:var(--mist);letter-spacing:.12em;margin-bottom:4rem}
+.testi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:left}
+.testi-card{background:var(--cream);padding:2.8rem;border:1px solid rgba(196,148,74,.1);transition:box-shadow .4s,transform .4s}
+.testi-card:hover{box-shadow:0 18px 50px rgba(0,0,0,.06);transform:translateY(-4px)}
+.testi-q{font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:var(--gold);opacity:.3;line-height:.4;margin-bottom:1.4rem}
+.testi-body{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.9;color:var(--umber);margin-bottom:1.8rem}
+.testi-who{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.testi-who strong{color:var(--bark);font-weight:400}
+
+/* ── BOOKING CTA ── */
+.cta-band{background:linear-gradient(135deg,#1e180e 0%,#2a2010 50%,#1a1508 100%);padding:9rem 5rem;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(196,148,74,.1) 0%,transparent 70%)}
+.cta-band-inner{position:relative;z-index:1}
+.cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,6rem);font-weight:300;color:var(--white);line-height:1.05;margin-bottom:1.2rem}
+.cta-band h2 em{font-style:italic;color:var(--gold);display:block}
+.cta-band p{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3rem}
+.btn-gold{display:inline-block;font-size:.65rem;letter-spacing:.32em;text-transform:uppercase;color:var(--bark);background:var(--gold);padding:1.1rem 3.2rem;text-decoration:none;transition:background .3s,transform .3s,box-shadow .3s;cursor:none;position:relative;overflow:hidden}
+.btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,.15);transition:left .4s}
+.btn-gold:hover::before{left:100%}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px);box-shadow:0 12px 30px rgba(196,148,74,.3)}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:5rem 5rem 2.5rem}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.foot-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:.22em;color:var(--white);text-transform:uppercase;margin-bottom:.3rem}
+.foot-brand-sub{font-size:.5rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:1.3rem}
+.foot-brand p{font-size:.72rem;line-height:2.1;color:rgba(255,255,255,.28);max-width:260px}
+.foot-col h4{font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:.75rem}
+.foot-col a{font-size:.72rem;color:rgba(255,255,255,.35);text-decoration:none;letter-spacing:.04em;transition:color .3s;cursor:none}
+.foot-col a:hover{color:var(--gold-l)}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center}
+.foot-bottom span{font-size:.58rem;letter-spacing:.12em;color:rgba(255,255,255,.18)}
+.foot-bottom em{color:var(--gold);font-style:normal}
+
+/* ══════════════════════════════════
+   INNER PAGES
+═══════════════════════════════════ */
+
+/* ── PAGE HERO BANNER (shared) ── */
+.page-banner{position:relative;height:52vh;min-height:360px;display:flex;align-items:flex-end;overflow:hidden;padding:0 5rem 5rem}
+.page-banner-bg{position:absolute;inset:0}
+.page-banner h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,6.5rem);font-weight:300;color:var(--white);line-height:.95;position:relative;z-index:2}
+.page-banner h1 em{font-style:italic;color:var(--gold-l)}
+.page-banner-label{position:relative;z-index:2;font-size:.58rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem}
+
+/* ── ATELIER PAGE ── */
+.atelier-story{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;padding:7rem 5rem}
+.atelier-story h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;line-height:1.2;margin-bottom:2rem}
+.atelier-story h2 em{font-style:italic;color:var(--clay)}
+.atelier-story p{font-size:.78rem;line-height:2.4;color:var(--mist);margin-bottom:1.4rem}
+.atelier-values{background:var(--linen);padding:6rem 5rem}
+.atelier-values h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;margin-bottom:3rem}
+.atelier-values h2 em{font-style:italic;color:var(--clay)}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}
+.value-item{border-top:1px solid rgba(196,148,74,.2);padding-top:2rem}
+.value-item h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;margin-bottom:.8rem}
+.value-item p{font-size:.72rem;line-height:2.1;color:var(--mist)}
+.team-section{padding:7rem 5rem;background:var(--cream)}
+.team-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:300;margin-bottom:.5rem}
+.team-section h2 em{font-style:italic;color:var(--clay)}
+.team-sub{font-size:.7rem;color:var(--mist);letter-spacing:.1em;margin-bottom:3.5rem}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.team-card{cursor:none}
+.team-avatar{height:280px;margin-bottom:1.2rem;overflow:hidden}
+.team-avatar svg{width:100%;height:100%}
+.team-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;margin-bottom:.3rem}
+.team-card span{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+
+/* ── SERVICES PAGE ── */
+.services-intro{padding:5rem 5rem 3rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:end}
+.services-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;line-height:1.1}
+.services-intro h2 em{font-style:italic;color:var(--clay)}
+.services-intro p{font-size:.78rem;line-height:2.3;color:var(--mist)}
+.services-list{padding:2rem 5rem 8rem}
+.service-row{display:grid;grid-template-columns:3rem 160px 1fr auto;gap:3rem;align-items:center;padding:2.5rem 0;border-bottom:1px solid rgba(196,148,74,.1);transition:background .3s;cursor:none}
+.service-img-wrap{border-radius:60px 60px 0 0;overflow:hidden;width:100%;height:140px;}
+.service-row-img{width:100%;height:100%;background-size:cover;background-position:center;transition:transform .6s ease;}
+.service-row:hover .service-row-img{transform:scale(1.08);}
+.service-row:hover{background:rgba(196,148,74,.03)}
+.service-row:first-child{border-top:1px solid rgba(196,148,74,.1)}
+.service-row-num{font-family:'Cormorant Garamond',serif;font-size:.75rem;color:var(--gold);opacity:.6;padding-top:.4rem}
+.service-row-info h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;margin-bottom:.5rem}
+.service-row-info h3 em{font-style:italic;color:var(--clay)}
+.service-row-info p{font-size:.72rem;line-height:2;color:var(--mist);max-width:520px}
+.service-row-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);white-space:nowrap;padding-top:.3rem}
+
+/* ── COLLECTION PAGE ── */
+.collection-intro{padding:5rem 5rem 3rem}
+.collection-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;margin-bottom:.7rem}
+.collection-intro h2 em{font-style:italic;color:var(--clay)}
+.collection-intro p{font-size:.78rem;line-height:2.3;color:var(--mist);max-width:560px}
+.collection-masonry{padding:3rem 5rem 7rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.col-item{overflow:hidden;cursor:none;position:relative}
+.col-item.tall{grid-row:span 2}
+.col-item-img{width:100%;height:100%;min-height:260px;transition:transform .7s ease}
+.col-item:hover .col-item-img{transform:scale(1.04)}
+.col-item-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(30,20,10,.75),transparent);padding:2rem 1.5rem .8rem;opacity:0;transition:opacity .4s}
+.col-item:hover .col-item-cap{opacity:1}
+.col-item-cap span{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--white)}
+
+/* ── JOURNAL PAGE ── */
+.journal-intro{padding:5rem 5rem 3rem}
+.journal-intro h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;margin-bottom:.7rem}
+.journal-intro h2 em{font-style:italic;color:var(--clay)}
+.journal-grid{padding:2rem 5rem 7rem;display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}
+.journal-card{cursor:none}
+.journal-thumb{height:220px;overflow:hidden;margin-bottom:1.5rem}
+.journal-thumb svg{width:100%;height:100%;transition:transform .6s ease}
+.journal-card:hover .journal-thumb svg{transform:scale(1.04)}
+.journal-tag{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.journal-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;line-height:1.3;margin-bottom:.7rem}
+.journal-card h3 em{font-style:italic;color:var(--clay)}
+.journal-card p{font-size:.72rem;line-height:2;color:var(--mist);margin-bottom:1rem}
+.journal-card a{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bark);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px;cursor:none;transition:color .3s}
+.journal-card a:hover{color:var(--gold)}
+
+/* ── CONTACT PAGE ── */
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:70vh}
+.contact-info{background:var(--bark);padding:7rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.contact-info .s-label{color:var(--gold)}
+.contact-info h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3.2rem);font-weight:300;color:var(--white);line-height:1.2;margin-bottom:2.5rem}
+.contact-info h2 em{font-style:italic;color:var(--gold-l)}
+.contact-detail{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.contact-detail h4{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.contact-detail p{font-size:.78rem;line-height:2;color:rgba(255,255,255,.45)}
+.contact-form-side{background:var(--linen);padding:7rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.contact-form-side h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:2.5rem}
+.contact-form-side h3 em{font-style:italic;color:var(--clay)}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--mist);margin-bottom:.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(196,148,74,.25);padding:.7rem 0;font-family:'Jost',sans-serif;font-size:.78rem;color:var(--bark);outline:none;transition:border-color .3s;-webkit-appearance:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold)}
+.form-group textarea{resize:none;height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1.5rem 2rem}
+  nav.scrolled{padding:1rem 2rem}
+  .nav-links{display:none}
+  section{padding:5rem 2rem}
+  .intro-band,.atelier-story,.services-intro,.ritual-inner,.contact-layout{grid-template-columns:1fr}
+  .ritual-visual{height:280px}
+  .spa-grid,.team-grid{grid-template-columns:1fr 1fr}
+  .values-grid,.testi-row,.collection-masonry,.journal-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .hero-content,.page-banner{padding-left:2rem;padding-right:2rem}
+  .gal-strip{height:220px}
+  .services-list,.collection-intro,.journal-intro,.journal-grid,.services-intro,.contact-info,.contact-form-side{padding-left:2rem;padding-right:2rem}
+  .atelier-story,.atelier-values,.team-section{padding-left:2rem;padding-right:2rem}
+  .cta-band,.footer{padding-left:2rem;padding-right:2rem}
+}
+
+/* ── MODALS ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 20, 16, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-box {
+  background: var(--cream);
+  padding: 4rem 3.5rem;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+  border: 1px solid rgba(196,148,74,.2);
+}
+.modal-overlay.active .modal-box {
+  transform: translateY(0);
+}
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--mist);
+  cursor: none;
+  transition: color 0.3s;
+}
+.modal-close:hover {
+  color: var(--bark);
+}
+.modal-box h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.modal-box h3 em {
+  font-style: italic;
+  color: var(--clay);
+}
+.modal-box p.modal-sub {
+  font-size: 0.72rem;
+  color: var(--mist);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.modal-box .form-group {
+  margin-bottom: 1.8rem;
+}
+.modal-box .btn-gold {
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  border: none;
+  font-family: 'Jost', sans-serif;
+}
+.modal-error {
+  color: #a84747;
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 1rem;
+  min-height: 1.2em;
+}
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="ring"></div>
+<div class="page-overlay" id="overlay"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <a href="#" class="nav-brand" data-page="home">
+    <span class="nav-brand-name">Anara</span>
+    <span class="nav-brand-sub">Hair Spa & Wellness</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" data-page="atelier">Atelier</a></li>
+    <li><a href="#" data-page="services">Services</a></li>
+    <li><a href="#" data-page="collection">Collection</a></li>
+    <li><a href="#" data-page="journal">Journal</a></li>
+    <li><a href="#" data-page="contact">Contact</a></li>
+  </ul>
+  <a href="#" class="nav-book" id="nav-book-btn">Book Now</a>
+</nav>
+
+<!-- ═══ MODALS ═══ -->
+<!-- Login Modal -->
+<div class="modal-overlay" id="login-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('login-modal')">&times;</button>
+    <h3>Client <em>Access</em></h3>
+    <p class="modal-sub">Please log in to manage your bookings</p>
+    <form id="login-form">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="login-user" required placeholder="admin">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-pass" required placeholder="password">
+      </div>
+      <button type="submit" class="btn-gold">Sign In</button>
+      <div class="modal-error" id="login-error"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Booking Modal -->
+<div class="modal-overlay" id="book-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('book-modal')">&times;</button>
+    <h3>Reserve <em>Ritual</em></h3>
+    <p class="modal-sub">Secure your appointment at Anara</p>
+    <form id="book-form">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="book-name" required placeholder="Your name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="book-phone" required placeholder="+91 98400 00000">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="book-date" required>
+        </div>
+        <div class="form-group">
+          <label>Time</label>
+          <input type="time" id="book-time" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Treatment</label>
+        <select id="book-treatment">
+          <option>Scalp Ritual Massage</option>
+          <option>Steam Infusion</option>
+          <option>Oil Therapy</option>
+          <option>Keratin Repair</option>
+          <option>Deep Conditioning</option>
+          <option>Free Consultation</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-gold">Confirm Booking</button>
+      <div class="modal-error" id="book-error" style="color:var(--clay);"></div>
+    </form>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════
+     PAGE: HOME
+════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-stem"></div>
+    <div class="hero-aside">Scalp · Steam · Restore</div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">A Sanctuary for Your Hair</p>
+      <h1 class="hero-title">Restore.<br>Renew.<br><em>Radiate.</em></h1>
+      <p class="hero-body">Where ancient hair rituals meet modern botanical science. Anara is Chennai's most intimate hair spa — designed for deep healing, not just styling.</p>
+      <a href="#" class="hero-cta" data-page="services">
+        <span class="hero-cta-bar"></span>
+        Explore Treatments
+      </a>
+    </div>
+    <div class="scroll-beacon">
+      <div class="scroll-wheel"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="intro-band reveal">
+    <div class="big-num">14</div>
+    <p>At <em>Anara</em>, every service begins with a scalp consultation. We believe that healthy hair starts at the root — nourished by ritual, sustained by science, and elevated by touch. Fourteen years of mastery in Chennai.</p>
+  </div>
+
+  <section class="spa-services reveal">
+    <p class="s-label">Signature Treatments</p>
+    <h2>Our <em>Healing</em> Rituals</h2>
+    <p class="spa-services-sub">Each treatment is a bespoke journey crafted for your hair type and scalp condition</p>
+    <div class="spa-grid">
+      <div class="spa-card reveal" style="transition-delay:.05s">
+        <svg class="spa-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="18" stroke="#c4944a" stroke-width=".8" opacity=".4"/>
+          <path d="M20 8 C20 8 14 14 14 20 C14 26 20 30 20 30 C20 30 26 26 26 20 C26 14 20 8 20 8Z" stroke="#c4944a" stroke-width=".9" fill="none"/>
+          <circle cx="20" cy="20" r="3" fill="#c4944a" opacity=".5"/>
+        </svg>
+        <h3>Scalp<em>Ritual</em></h3>
+        <p>A meditative scalp massage with warm Ayurvedic oils, targeting tension, promoting circulation, and awakening dormant follicles.</p>
+        <div class="spa-card-price">From <strong>₹1,800</strong></div>
+      </div>
+      <div class="spa-card reveal" style="transition-delay:.1s">
+        <svg class="spa-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="16" width="24" height="14" rx="2" stroke="#c4944a" stroke-width=".8" opacity=".4"/>
+          <path d="M14 16 C14 16 14 10 20 10 C26 10 26 16 26 16" stroke="#c4944a" stroke-width=".9" fill="none"/>
+          <path d="M12 23 Q16 19 20 23 Q24 27 28 23" stroke="#c4944a" stroke-width=".8" fill="none"/>
+        </svg>
+        <h3>Steam<em>Infusion</em></h3>
+        <p>Therapeutic hair steaming opens the cuticle to allow deep penetration of botanical serums, restoring moisture and luminosity.</p>
+        <div class="spa-card-price">From <strong>₹2,200</strong></div>
+      </div>
+      <div class="spa-card reveal" style="transition-delay:.15s">
+        <svg class="spa-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 6 L20 34" stroke="#c4944a" stroke-width=".8" opacity=".4"/>
+          <path d="M10 12 Q15 10 20 14 Q25 18 30 12" stroke="#c4944a" stroke-width=".9" fill="none"/>
+          <path d="M10 22 Q15 20 20 24 Q25 28 30 22" stroke="#c4944a" stroke-width=".9" fill="none"/>
+          <circle cx="20" cy="6" r="2" fill="#c4944a" opacity=".5"/>
+        </svg>
+        <h3>Oil<em>Therapy</em></h3>
+        <p>Cold-pressed Brahmi, Bhringraj, and Amla oils blended to your dosha — massaged in layers with heat-activation for maximum absorption.</p>
+        <div class="spa-card-price">From <strong>₹2,500</strong></div>
+      </div>
+      <div class="spa-card reveal" style="transition-delay:.2s">
+        <svg class="spa-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 28 Q14 16 20 12 Q26 16 32 28" stroke="#c4944a" stroke-width=".9" fill="none" opacity=".5"/>
+          <circle cx="20" cy="10" r="3" stroke="#c4944a" stroke-width=".8" fill="none"/>
+          <line x1="20" y1="13" x2="20" y2="18" stroke="#c4944a" stroke-width=".8"/>
+        </svg>
+        <h3>Keratin<em>Repair</em></h3>
+        <p>A restructuring treatment that bonds to damaged cortex proteins, smoothing frizz and imparting glass-like shine that lasts months.</p>
+        <div class="spa-card-price">From <strong>₹3,800</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ritual">
+    <div class="ritual-inner">
+      <div class="ritual-text reveal">
+        <p class="s-label">The Anara Way</p>
+        <h2>Every visit is a<br><em>four-step ritual</em></h2>
+        <p>We don't just treat hair — we treat the whole self. Our signature four-step protocol is designed to detox, nourish, protect, and restore with deep intention.</p>
+        <div class="ritual-steps">
+          <div class="ritual-step"><span class="step-num">01</span><div class="step-text"><h4>Consult</h4><p>Scalp analysis and hair health assessment with our specialist</p></div></div>
+          <div class="ritual-step"><span class="step-num">02</span><div class="step-text"><h4>Cleanse</h4><p>Gentle detox with pH-balanced botanical cleansers</p></div></div>
+          <div class="ritual-step"><span class="step-num">03</span><div class="step-text"><h4>Nourish</h4><p>Targeted treatment infused via steam and massage</p></div></div>
+          <div class="ritual-step"><span class="step-num">04</span><div class="step-text"><h4>Protect</h4><p>Sealant serum and UV-defense finish for lasting results</p></div></div>
+        </div>
+      </div>
+      <div class="ritual-visual reveal" style="transition-delay:.2s">
+        <div class="ritual-frame">
+          <svg viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="rg1" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#c4944a" stop-opacity=".12"/>
+                <stop offset="100%" stop-color="#1a1410" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="rl1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#2a1e10"/>
+                <stop offset="100%" stop-color="#1a1410"/>
+              </linearGradient>
+            </defs>
+            <rect width="480" height="520" fill="url(#rl1)"/>
+            <rect width="480" height="520" fill="url(#rg1)"/>
+            <!-- Spa bed silhouette -->
+            <rect x="80" y="280" width="320" height="80" rx="6" fill="#2d2318" stroke="#c4944a" stroke-width=".4" stroke-opacity=".3"/>
+            <rect x="60" y="260" width="60" height="100" rx="4" fill="#261c12"/>
+            <!-- Head circle -->
+            <ellipse cx="90" cy="300" rx="28" ry="28" fill="#3a2818" stroke="#c4944a" stroke-width=".5" stroke-opacity=".35"/>
+            <!-- Steam wisps -->
+            <path d="M200 260 Q206 240 200 220 Q194 200 200 180" stroke="#c4944a" stroke-width=".8" fill="none" opacity=".3">
+              <animate attributeName="opacity" values=".3;.6;.3" dur="3s" repeatCount="indefinite"/>
+            </path>
+            <path d="M220 270 Q228 248 220 226 Q212 204 220 182" stroke="#c4944a" stroke-width=".6" fill="none" opacity=".2">
+              <animate attributeName="opacity" values=".2;.5;.2" dur="4s" repeatCount="indefinite"/>
+            </path>
+            <path d="M240 265 Q246 242 240 218 Q234 194 240 170" stroke="#c4944a" stroke-width=".7" fill="none" opacity=".25">
+              <animate attributeName="opacity" values=".25;.55;.25" dur="3.5s" repeatCount="indefinite"/>
+            </path>
+            <!-- Oil drops -->
+            <ellipse cx="300" cy="200" rx="6" ry="9" fill="#c4944a" opacity=".25"/>
+            <ellipse cx="320" cy="230" rx="4" ry="6" fill="#c4944a" opacity=".18"/>
+            <ellipse cx="280" cy="220" rx="5" ry="7" fill="#c4944a" opacity=".2"/>
+            <!-- Decorative ring -->
+            <circle cx="240" cy="260" r="160" fill="none" stroke="#c4944a" stroke-width=".3" stroke-dasharray="4 8" opacity=".15"/>
+            <circle cx="240" cy="260" r="200" fill="none" stroke="#c4944a" stroke-width=".2" stroke-dasharray="2 12" opacity=".1"/>
+            <!-- Botanical leaves -->
+            <path d="M360 120 C380 100 400 110 390 140 C380 160 350 150 360 120Z" fill="#7a8c6e" opacity=".2"/>
+            <path d="M370 125 L385 138" stroke="#7a8c6e" stroke-width=".6" opacity=".25"/>
+            <path d="M100 150 C80 130 60 140 70 170 C80 190 110 180 100 150Z" fill="#7a8c6e" opacity=".15"/>
+            <!-- Floor reflection -->
+            <line x1="0" y1="360" x2="480" y2="360" stroke="#c4944a" stroke-width=".4" opacity=".15"/>
+          </svg>
+        </div>
+        <div class="ritual-tag">Hair Spa Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery strip -->
+  <div class="gal-strip">
+    <div class="gal-item"><div class="gal-bg" style="background-image:url('assets/srv_scalp_ritual_1773468485061.png');background-size:cover;background-position:center;height:100%"></div><div class="gal-lbl">Scalp Rituals</div></div>
+    <div class="gal-item"><div class="gal-bg" style="background-image:url('assets/srv_steam_infusion_1773468502473.png');background-size:cover;background-position:center;height:100%"></div><div class="gal-lbl">Steam Therapy</div></div>
+    <div class="gal-item"><div class="gal-bg" style="background-image:url('assets/srv_oil_therapy_1773468519531.png');background-size:cover;background-position:center;height:100%"></div><div class="gal-lbl">Oil Therapy</div></div>
+    <div class="gal-item"><div class="gal-bg" style="background-image:url('assets/srv_keratin_1773468534383.png');background-size:cover;background-position:center;height:100%"></div><div class="gal-lbl">Keratin</div></div>
+    <div class="gal-item"><div class="gal-bg" style="background-image:url('assets/col_atelier_1773467643910.png');background-size:cover;background-position:center;height:100%"></div><div class="gal-lbl">The Atelier</div></div>
+  </div>
+
+  <section class="testi reveal">
+    <p class="s-label">Client Voices</p>
+    <h2>Transformed by <em>Touch</em></h2>
+    <p class="testi-sub">Stories from those who found their hair's true potential at Anara</p>
+    <div class="testi-row">
+      <div class="testi-card reveal">
+        <div class="testi-q">"</div>
+        <p class="testi-body">My scalp had been dry and irritated for years. After one oil ritual at Anara, I felt the difference within days. This place is genuinely transformative.</p>
+        <div class="testi-who"><strong>Priya Krishnamurthy</strong> · Product Designer</div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.1s">
+        <div class="testi-q">"</div>
+        <p class="testi-body">The steam infusion treatment restored moisture I thought my hair had permanently lost. It is the only place in Chennai I trust completely.</p>
+        <div class="testi-who"><strong>Meera Sundaram</strong> · Architect</div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay:.2s">
+        <div class="testi-q">"</div>
+        <p class="testi-body">They asked questions no salon had ever asked. The personalized oil blend they made for me has changed my entire haircare routine.</p>
+        <div class="testi-who"><strong>Anika Rajan</strong> · Surgeon</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-band-inner reveal">
+      <h2>Begin your<br><em>hair wellness journey</em></h2>
+      <p>Private consultations available Monday through Saturday</p>
+      <a href="#" class="btn-gold" data-page="contact">Reserve Your Ritual</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-brand-name">Anara</div>
+        <div class="foot-brand-sub">Hair Spa & Wellness</div>
+        <p>A sanctuary for deep hair healing in the heart of Chennai. Where every strand is treated with intention and every scalp is heard.</p>
+      </div>
+      <div class="foot-col"><h4>Treatments</h4><ul>
+        <li><a href="#" data-page="services">Scalp Ritual</a></li>
+        <li><a href="#" data-page="services">Steam Infusion</a></li>
+        <li><a href="#" data-page="services">Oil Therapy</a></li>
+        <li><a href="#" data-page="services">Keratin Repair</a></li>
+        <li><a href="#" data-page="services">Bridal Packages</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Anara</h4><ul>
+        <li><a href="#" data-page="atelier">Our Story</a></li>
+        <li><a href="#" data-page="atelier">The Team</a></li>
+        <li><a href="#" data-page="journal">Journal</a></li>
+        <li><a href="#" data-page="collection">Gallery</a></li>
+        <li><a href="#" data-page="contact">Careers</a></li>
+      </ul></div>
+      <div class="foot-col"><h4>Find Us</h4><ul>
+        <li><a href="#">14 Alwarpet, Chennai</a></li>
+        <li><a href="#">Tue – Sun: 10am – 7pm</a></li>
+        <li><a href="#">+91 98400 00000</a></li>
+        <li><a href="#">hello@anaraspa.in</a></li>
+        <li><a href="#">@anarahairspa</a></li>
+      </ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Anara Hair Spa. All rights reserved.</span>
+      <span>Crafted with <em>care</em> · Privacy Policy</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════
+     PAGE: ATELIER
+════════════════════════════════ -->
+<div class="page" id="page-atelier">
+  <div class="page-banner">
+    <div class="page-banner-bg" style="background:linear-gradient(160deg,#1e160a,#2a1e10,#1a1408)">
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.15" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg"><circle cx="300" cy="250" r="200" fill="none" stroke="#c4944a" stroke-width=".5"/><circle cx="900" cy="250" r="150" fill="none" stroke="#c4944a" stroke-width=".4"/><line x1="0" y1="250" x2="1200" y2="250" stroke="#c4944a" stroke-width=".3"/></svg>
+    </div>
+    <div style="position:relative;z-index:2">
+      <p class="page-banner-label">Our Story</p>
+      <h1>The <em>Atelier</em></h1>
+    </div>
+  </div>
+  <div class="atelier-story">
+    <div class="reveal">
+      <p class="s-label">Founded 2009</p>
+      <h2>Born from a belief in <em>hair as wellness</em></h2>
+      <p>Anara was founded in 2009 by trichologist Dr. Kavitha Nair, who saw a gap between the clinical and the luxurious. Hair health, she believed, should be both scientifically rigorous and deeply sensorial.</p>
+      <p>The name Anara — meaning 'pomegranate' in Sanskrit — was chosen for its symbol of renewal, abundance, and inner vitality. Every treatment we offer carries that spirit.</p>
+      <p>Today, from our atelier in Alwarpet, we see clients from across Tamil Nadu and beyond, each seeking what only a true hair spa can provide: restoration at the root.</p>
+    </div>
+    <div class="reveal" style="transition-delay:.15s">
+      <p class="s-label">Our Approach</p>
+      <h2>Science meets <em>tradition</em></h2>
+      <p>We combine trichological diagnostics with time-tested Ayurvedic formulations. Our specialists hold certifications in both cosmetology and integrative wellness, ensuring every recommendation is grounded in evidence.</p>
+      <p>We source our botanical ingredients from certified organic farms in Kerala and the Nilgiris. Cold-pressed, unrefined, and as close to their natural state as possible.</p>
+      <p>No shortcuts. No filler ingredients. No rushed appointments.</p>
+    </div>
+  </div>
+  <div class="atelier-values reveal">
+    <p class="s-label">What We Stand For</p>
+    <h2>Three <em>commitments</em></h2>
+    <div class="values-grid">
+      <div class="value-item reveal">
+        <h3>Intention</h3>
+        <p>Every appointment begins with a consultation. We listen before we touch. Your hair's story guides everything that follows.</p>
+      </div>
+      <div class="value-item reveal" style="transition-delay:.1s">
+        <h3>Purity</h3>
+        <p>We use only clean, botanical formulations. No sulphates, parabens, or synthetic fragrance ever enters our treatments.</p>
+      </div>
+      <div class="value-item reveal" style="transition-delay:.2s">
+        <h3>Mastery</h3>
+        <p>Our specialists train for a minimum of two years before treating clients independently. Excellence is non-negotiable.</p>
+      </div>
+    </div>
+  </div>
+  <div class="team-section">
+    <p class="s-label">Our Specialists</p>
+    <h2>The <em>Team</em></h2>
+    <p class="team-sub">Each member trained in trichology, Ayurveda, and advanced hair wellness</p>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background:var(--linen)">
+          <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="280" fill="#ede3d5"/><ellipse cx="100" cy="100" rx="42" ry="48" fill="#d4c4b0"/><rect x="40" y="155" width="120" height="125" rx="60" fill="#c4b4a0"/><ellipse cx="100" cy="100" rx="38" ry="44" fill="#c8b89a" opacity=".7"/></svg>
+        </div>
+        <h4>Dr. Kavitha Nair</h4>
+        <span>Founder & Trichologist</span>
+      </div>
+      <div class="team-card reveal" style="transition-delay:.08s">
+        <div class="team-avatar" style="background:var(--linen)">
+          <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="280" fill="#ede3d5"/><ellipse cx="100" cy="100" rx="42" ry="48" fill="#d4c4b0"/><rect x="40" y="155" width="120" height="125" rx="60" fill="#c4b4a0"/></svg>
+        </div>
+        <h4>Saranya Mohan</h4>
+        <span>Senior Hair Therapist</span>
+      </div>
+      <div class="team-card reveal" style="transition-delay:.16s">
+        <div class="team-avatar" style="background:var(--linen)">
+          <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="280" fill="#ede3d5"/><ellipse cx="100" cy="100" rx="42" ry="48" fill="#d4c4b0"/><rect x="40" y="155" width="120" height="125" rx="60" fill="#c4b4a0"/></svg>
+        </div>
+        <h4>Divya Chandran</h4>
+        <span>Ayurvedic Specialist</span>
+      </div>
+      <div class="team-card reveal" style="transition-delay:.24s">
+        <div class="team-avatar" style="background:var(--linen)">
+          <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="280" fill="#ede3d5"/><ellipse cx="100" cy="100" rx="42" ry="48" fill="#d4c4b0"/><rect x="40" y="155" width="120" height="125" rx="60" fill="#c4b4a0"/></svg>
+        </div>
+        <h4>Lakshmi Priya</h4>
+        <span>Scalp Analyst</span>
+      </div>
+    </div>
+  </div>
+  <section class="cta-band"><div class="cta-band-inner reveal"><h2>Meet us <em>in person</em></h2><p>Book a complimentary consultation</p><a href="#" class="btn-gold" data-page="contact">Book a Visit</a></div></section>
+</div>
+
+<!-- ═══════════════════════════════
+     PAGE: SERVICES
+════════════════════════════════ -->
+<div class="page" id="page-services">
+  <div class="page-banner">
+    <div class="page-banner-bg" style="background:linear-gradient(160deg,#1a1610,#26200e,#1c1a0c)"></div>
+    <div style="position:relative;z-index:2">
+      <p class="page-banner-label">What We Offer</p>
+      <h1>Our <em>Services</em></h1>
+    </div>
+  </div>
+  <div class="services-intro reveal">
+    <div><p class="s-label">Complete Menu</p><h2>Treatments designed for <em>every hair need</em></h2></div>
+    <p>Every service is preceded by a no-cost consultation. Pricing varies by hair length, density, and treatment complexity. All prices listed are base rates.</p>
+  </div>
+  <div class="services-list">
+    <div class="service-row reveal"><div class="service-row-num">01</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_scalp_ritual_1773468485061.png')"></div></div><div class="service-row-info"><h3>Scalp <em>Ritual Massage</em></h3><p>A 60-minute Ayurvedic scalp massage using warm, personalised oil blend targeting stress relief, circulation, and follicle health.</p></div><div class="service-row-price">From ₹1,800</div></div>
+    <div class="service-row reveal" style="transition-delay:.05s"><div class="service-row-num">02</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_steam_infusion_1773468502473.png')"></div></div><div class="service-row-info"><h3>Botanical <em>Steam Infusion</em></h3><p>Therapeutic hair steaming session with a customised botanical serum. Opens the cuticle for deep moisture restoration and shine.</p></div><div class="service-row-price">From ₹2,200</div></div>
+    <div class="service-row reveal" style="transition-delay:.1s"><div class="service-row-num">03</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_oil_therapy_1773468519531.png')"></div></div><div class="service-row-info"><h3>Personalised <em>Oil Therapy</em></h3><p>Cold-pressed Ayurvedic oil blend formulated for your specific hair type and scalp condition, applied in heated layers.</p></div><div class="service-row-price">From ₹2,500</div></div>
+    <div class="service-row reveal" style="transition-delay:.15s"><div class="service-row-num">04</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_keratin_1773468534383.png')"></div></div><div class="service-row-info"><h3>Keratin <em>Repair Treatment</em></h3><p>A professional bond-restoration treatment for chemically damaged or over-processed hair. Glass-like smoothness that lasts 3–5 months.</p></div><div class="service-row-price">From ₹3,800</div></div>
+    <div class="service-row reveal" style="transition-delay:.2s"><div class="service-row-num">05</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_conditioning_1773468551546.png')"></div></div><div class="service-row-info"><h3>Deep <em>Conditioning Mask</em></h3><p>A 45-minute intensive protein and moisture mask customised to your hair porosity level. Followed by steam and cool rinse.</p></div><div class="service-row-price">From ₹1,400</div></div>
+    <div class="service-row reveal" style="transition-delay:.25s"><div class="service-row-num">06</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_detox_1773468567967.png')"></div></div><div class="service-row-info"><h3>Hair <em>Detox Ritual</em></h3><p>A full scalp clarifying treatment to remove product build-up, environmental pollutants, and excess sebum. Includes exfoliation.</p></div><div class="service-row-price">From ₹2,000</div></div>
+    <div class="service-row reveal" style="transition-delay:.3s"><div class="service-row-num">07</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/srv_bridal_1773468584427.png')"></div></div><div class="service-row-info"><h3>Bridal <em>Wellness Package</em></h3><p>A curated 3-session programme beginning 6 weeks before your wedding — scalp prep, growth ritual, and strength treatment.</p></div><div class="service-row-price">From ₹9,500</div></div>
+    <div class="service-row reveal" style="transition-delay:.35s"><div class="service-row-num">08</div><div class="service-img-wrap"><div class="service-row-img" style="background-image:url('assets/col_atelier_1773467643910.png')"></div></div><div class="service-row-info"><h3>Monthly <em>Membership</em></h3><p>Two treatments per month of your choice, priority booking, and complimentary scalp analysis every quarter.</p></div><div class="service-row-price">₹4,200/mo</div></div>
+  </div>
+  <section class="cta-band"><div class="cta-band-inner reveal"><h2>Not sure which <em>treatment to choose?</em></h2><p>Book a free 20-minute scalp consultation</p><a href="#" class="btn-gold" data-page="contact">Free Consultation</a></div></section>
+</div>
+
+<!-- ═══════════════════════════════
+     PAGE: COLLECTION
+════════════════════════════════ -->
+<div class="page" id="page-collection">
+  <div class="page-banner">
+    <div class="page-banner-bg" style="background:linear-gradient(160deg,#10180e,#1a2614,#141c10)"></div>
+    <div style="position:relative;z-index:2">
+      <p class="page-banner-label">Visual Stories</p>
+      <h1>The <em>Collection</em></h1>
+    </div>
+  </div>
+  <div class="collection-intro reveal">
+    <p class="s-label">Gallery</p>
+    <h2>Spaces, <em>rituals</em>, and results</h2>
+    <p>A visual record of our atelier, our treatments, and the transformations we have been privileged to be part of. Each image is a moment of care made visible.</p>
+  </div>
+  <div class="collection-masonry">
+    <div class="col-item tall reveal"><div class="col-item-img" style="background-image:url('assets/col_ritual_room_1773467569279.png');background-size:cover;background-position:center;min-height:520px"></div><div class="col-item-cap"><span>The Ritual Room</span></div></div>
+    <div class="col-item reveal" style="transition-delay:.08s"><div class="col-item-img" style="background-image:url('assets/col_steam_session_1773467592056.png');background-size:cover;background-position:center;min-height:260px"></div><div class="col-item-cap"><span>Steam Session</span></div></div>
+    <div class="col-item reveal" style="transition-delay:.16s"><div class="col-item-img" style="background-image:url('assets/col_botanical_oils_1773467607983.png');background-size:cover;background-position:center;min-height:260px"></div><div class="col-item-cap"><span>Botanical Oils</span></div></div>
+    <div class="col-item reveal" style="transition-delay:.24s"><div class="col-item-img" style="background-image:url('assets/col_oil_ritual_1773467624458.png');background-size:cover;background-position:center;min-height:260px"></div><div class="col-item-cap"><span>Oil Ritual</span></div></div>
+    <div class="col-item tall reveal" style="transition-delay:.32s"><div class="col-item-img" style="background-image:url('assets/col_atelier_1773467643910.png');background-size:cover;background-position:center;min-height:520px"></div><div class="col-item-cap"><span>The Atelier</span></div></div>
+    <div class="col-item reveal" style="transition-delay:.4s"><div class="col-item-img" style="background-image:url('assets/col_consult_1773467659424.png');background-size:cover;background-position:center;min-height:260px"></div><div class="col-item-cap"><span>Consultation</span></div></div>
+    <div class="col-item reveal" style="transition-delay:.48s"><div class="col-item-img" style="background-image:url('assets/col_wellness_1773467677298.png');background-size:cover;background-position:center;min-height:260px"></div><div class="col-item-cap"><span>Hair Wellness</span></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     PAGE: JOURNAL
+════════════════════════════════ -->
+<div class="page" id="page-journal">
+  <div class="page-banner">
+    <div class="page-banner-bg" style="background:linear-gradient(160deg,#181410,#221a0e,#1a1610)"></div>
+    <div style="position:relative;z-index:2">
+      <p class="page-banner-label">Insights & Stories</p>
+      <h1>The <em>Journal</em></h1>
+    </div>
+  </div>
+  <div class="journal-intro reveal">
+    <p class="s-label">Hair Wellness Wisdom</p>
+    <h2>Knowledge for <em>healthier hair</em></h2>
+    <p>Written by our trichologists and Ayurvedic specialists — practical, science-backed guidance for your hair wellness journey.</p>
+  </div>
+  <div class="journal-grid">
+    <div class="journal-card reveal">
+      <div class="journal-thumb" style="background-image:url('assets/srv_scalp_ritual_1773468485061.png');background-size:cover;background-position:center;"></div>
+      <p class="journal-tag">Scalp Health</p>
+      <h3>Why your scalp needs as much <em>care as your face</em></h3>
+      <p>The scalp is skin — often neglected skin. Here's why a consistent scalp care routine is the foundation of every healthy hair journey.</p>
+      <a href="#">Read Article</a>
+    </div>
+    <div class="journal-card reveal" style="transition-delay:.1s">
+      <div class="journal-thumb" style="background-image:url('assets/col_botanical_oils_1773467607983.png');background-size:cover;background-position:center;"></div>
+      <p class="journal-tag">Ayurveda</p>
+      <h3>The ancient oils that <em>modern science confirms</em></h3>
+      <p>Bhringraj, Brahmi, Amla — we explore the clinical research behind traditional Ayurvedic hair oils and how to use them correctly.</p>
+      <a href="#">Read Article</a>
+    </div>
+    <div class="journal-card reveal" style="transition-delay:.2s">
+      <div class="journal-thumb" style="background-image:url('assets/col_steam_session_1773467592056.png');background-size:cover;background-position:center;"></div>
+      <p class="journal-tag">Treatments</p>
+      <h3>Steam therapy: the most <em>underrated hair treatment</em></h3>
+      <p>A deep-dive into how therapeutic steam works at the molecular level to restore moisture, elasticity, and shine to dehydrated hair.</p>
+      <a href="#">Read Article</a>
+    </div>
+    <div class="journal-card reveal" style="transition-delay:.1s">
+      <div class="journal-thumb" style="background-image:url('assets/col_wellness_1773467677298.png');background-size:cover;background-position:center;"></div>
+      <p class="journal-tag">Wellness</p>
+      <h3>The connection between <em>stress and hair loss</em></h3>
+      <p>Telogen effluvium explained — and what our trichologists recommend for clients experiencing stress-related shedding.</p>
+      <a href="#">Read Article</a>
+    </div>
+    <div class="journal-card reveal" style="transition-delay:.2s">
+      <div class="journal-thumb" style="background-image:url('assets/srv_detox_1773468567967.png');background-size:cover;background-position:center;"></div>
+      <p class="journal-tag">Ingredients</p>
+      <h3>What to look for — and <em>avoid</em> — on a shampoo label</h3>
+      <p>Our guide to decoding haircare ingredient lists. The sulphates, silicones, and alcohols that may be quietly damaging your hair.</p>
+      <a href="#">Read Article</a>
+    </div>
+    <div class="journal-card reveal" style="transition-delay:.3s">
+      <div class="journal-thumb" style="background-image:url('assets/srv_conditioning_1773468551546.png');background-size:cover;background-position:center;"></div>
+      <p class="journal-tag">Routines</p>
+      <h3>Building a weekly <em>hair spa ritual at home</em></h3>
+      <p>Our therapists share a simple five-step weekly routine you can do between visits to maintain the results of professional treatment.</p>
+      <a href="#">Read Article</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     PAGE: CONTACT
+════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="page-banner">
+    <div class="page-banner-bg" style="background:linear-gradient(160deg,#1a1208,#261a0e,#1c1408)"></div>
+    <div style="position:relative;z-index:2">
+      <p class="page-banner-label">Get in Touch</p>
+      <h1>Visit <em>Anara</em></h1>
+    </div>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info reveal">
+      <p class="s-label">Find Us</p>
+      <h2>Come visit our <em>sanctuary</em></h2>
+      <div class="contact-detail"><h4>Address</h4><p>14, Second Avenue<br>Alwarpet, Chennai — 600 018<br>Tamil Nadu, India</p></div>
+      <div class="contact-detail"><h4>Hours</h4><p>Tuesday – Saturday: 10am – 7pm<br>Sunday: 10am – 4pm<br>Monday: Closed</p></div>
+      <div class="contact-detail"><h4>Phone & Email</h4><p>+91 98400 00000<br>hello@anaraspa.in</p></div>
+      <div class="contact-detail" style="border:none"><h4>Follow</h4><p>@anarahairspa on Instagram</p></div>
+    </div>
+    <div class="contact-form-side reveal" style="transition-delay:.15s">
+      <p class="s-label">Book a Treatment</p>
+      <h3>Reserve your <em>ritual</em></h3>
+      <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 98400 00000"></div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+      </div>
+      <div class="form-group"><label>Treatment</label>
+        <select>
+          <option>Scalp Ritual Massage</option>
+          <option>Steam Infusion</option>
+          <option>Oil Therapy</option>
+          <option>Keratin Repair</option>
+          <option>Deep Conditioning</option>
+          <option>Free Consultation</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message (optional)</label><textarea placeholder="Any notes about your hair or specific concerns…"></textarea></div>
+      <a href="#" class="btn-gold" style="display:inline-block;margin-top:.5rem">Send Request</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Cursor ──
+const cur = document.getElementById('cursor');
+const rng = document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function animR(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;rng.style.left=rx+'px';rng.style.top=ry+'px';requestAnimationFrame(animR)})();
+document.querySelectorAll('a,button,.spa-card,.service-row,.testi-card,.gal-item,.col-item,.journal-card,.team-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>rng.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>rng.classList.remove('hov'));
+});
+
+// ── Modals & API Fetch ──
+function openModal(id) {
+  document.getElementById(id).classList.add('active');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+
+// Intercept Book Now click
+document.getElementById('nav-book-btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  openModal('login-modal');
+  document.getElementById('login-error').innerText = '';
+});
+
+// Login Form Submit
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const user = document.getElementById('login-user').value;
+  const pass = document.getElementById('login-pass').value;
+  const errDiv = document.getElementById('login-error');
+  
+  try {
+    const res = await fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ username: user, password: pass })
+    });
+    const data = await res.json();
+    if (data.success) {
+      closeModal('login-modal');
+      openModal('book-modal');
+      document.getElementById('book-error').innerText = '';
+      document.getElementById('login-form').reset();
+    } else {
+      errDiv.innerText = data.message || 'Login failed';
+    }
+  } catch(err) {
+    errDiv.innerText = 'Server error. Is the backend running?';
+  }
+});
+
+// Book Form Submit
+document.getElementById('book-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('book-name').value;
+  const phone = document.getElementById('book-phone').value;
+  const date = document.getElementById('book-date').value;
+  const time = document.getElementById('book-time').value;
+  const treatment = document.getElementById('book-treatment').value;
+  const errDiv = document.getElementById('book-error');
+  
+  try {
+    const res = await fetch('http://localhost:3000/api/reserve', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ name, phone, email:'', date, time, treatment, notes:'' })
+    });
+    const data = await res.json();
+    if (data.success) {
+      errDiv.style.color = 'var(--sage)';
+      errDiv.innerText = 'Reservation confirmed! See you soon.';
+      setTimeout(() => {
+        closeModal('book-modal');
+        document.getElementById('book-form').reset();
+        errDiv.innerText = '';
+      }, 2500);
+    } else {
+      errDiv.style.color = '#a84747';
+      errDiv.innerText = data.message || 'Booking failed';
+    }
+  } catch(err) {
+    errDiv.style.color = '#a84747';
+    errDiv.innerText = 'Server error. Is the backend running?';
+  }
+});
+
+
+// ── Nav scroll ──
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+
+// ── SPA Router ──
+const overlay = document.getElementById('overlay');
+let current = 'home';
+
+function navigateTo(pageId){
+  if(pageId===current)return;
+  overlay.className='page-overlay enter';
+  setTimeout(()=>{
+    // hide all pages
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    // show target
+    const target = document.getElementById('page-'+pageId);
+    if(!target)return;
+    target.classList.add('active');
+    current=pageId;
+    window.scrollTo(0,0);
+    // update active nav link
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      a.classList.toggle('active',a.dataset.page===pageId);
+    });
+    // nav color: home has dark hero, others have dark banner too
+    nav.classList.remove('on-light');
+    // exit overlay
+    overlay.className='page-overlay exit';
+    // trigger reveals on new page
+    setTimeout(()=>{
+      target.classList.add('page-in');
+      initReveals();
+    },80);
+    setTimeout(()=>overlay.className='page-overlay',560);
+  },480);
+}
+
+// attach all data-page links
+document.addEventListener('click',e=>{
+  const link = e.target.closest('[data-page]');
+  if(!link)return;
+  e.preventDefault();
+  navigateTo(link.dataset.page);
+});
+
+// ── Reveal on scroll ──
+function initReveals(){
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('visible');io.unobserve(en.target)}});
+  },{threshold:.1});
+  document.querySelectorAll('.page.active .reveal').forEach(r=>{
+    if(!r.classList.contains('visible'))io.observe(r);
+  });
+}
+initReveals();
+</script>
+</body>
+</html>
